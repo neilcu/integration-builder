@@ -1,0 +1,13 @@
+{
+  "description": "MF scenario parity for Sapiens integration testing",
+  "scenarios": [
+    { "name": "ok", "mfJclMember": "CtmRrOk", "expectedRc": 0 },
+    { "name": "fail-bind", "mfJclMember": "CtmRrBnd", "expectedRc": 3, "restartAt": "STEP.DDL3BIND" },
+    { "name": "fail-valftp", "mfJclMember": "CtmRrVft", "expectedRc": 3, "restartAt": "STEP.FTPBA" },
+    { "name": "fail-runsftp", "mfJclMember": "CtmRrSft", "expectedRc": 3, "restartAt": "STEP.U4BARA01" },
+    { "name": "fail-ddl", "mfJclMember": "CtmRrDdl", "expectedRc": 3, "restartAt": "STEP.DDL3BIND" },
+    { "name": "rerun-bind", "mfJclMember": "CtmRrD3b", "expectedRc": 0 },
+    { "name": "rerun-valftp", "mfJclMember": "CtmRrFtp", "expectedRc": 0 },
+    { "name": "rerun-runsftp", "mfJclMember": "CtmRrU4b", "expectedRc": 0 }
+  ]
+}

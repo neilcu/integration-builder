@@ -1,0 +1,21 @@
+{
+  "Type": "Job:ApplicationIntegrator:SAPIENS01112026",
+  "Description": "Sapiens batch failure scenario (STEP.BIND) — AI REST job type",
+  "Application": "Sapiens ACE Batch",
+  "Variables": [
+    { "sapiens_base_url": "https://ace-runtime.customer.example" },
+    { "flow_name": "ctm-pipeline-batch" },
+    { "scenario": "fail-bind" },
+    { "idempotency_token": "Control-M-Idem_%%ORDERID" },
+    { "attempt_reruns": "3" },
+    { "rerun_interval": "30" }
+  ],
+  "IdempotencyToken": "Control-M-Idem_%%ORDERID",
+  "Rerun": {
+    "Type": "Job:ApplicationIntegrator:SAPIENS01112026",
+    "Description": "Launcher rerun from STEP.DDL3BIND",
+    "Variables": [
+      { "scenario": "rerun-bind" }
+    ]
+  }
+}

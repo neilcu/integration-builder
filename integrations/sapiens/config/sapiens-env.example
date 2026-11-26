@@ -1,0 +1,19 @@
+# Sapiens ACE Runtime / customer-exposed OpenAPI endpoint (replace in deployment)
+SAPIENS_BASE_URL=https://ace-runtime.customer.example
+SAPIENS_USE_MOCK=1
+
+# Auth: none | api_key | oauth_client_credentials
+SAPIENS_AUTH_MODE=api_key
+SAPIENS_API_KEY=
+
+# OAuth (optional)
+SAPIENS_OAUTH_TOKEN_URL=
+SAPIENS_OAUTH_CLIENT_ID=
+SAPIENS_OAUTH_CLIENT_SECRET=
+SAPIENS_OAUTH_SCOPE=
+
+# Control-M Application Integrator idempotency (see IFDBX ReadMeFirst)
+# Planning / monitoring: Control-M-Idem_%%ORDERID
+SAPIENS_IDEMPOTENCY_KEY=
+SAPIENS_IDEMPOTENCY_HEADER=X-Idempotency-Key
+SAPIENS_HTTP_TIMEOUT=60

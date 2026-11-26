@@ -1,0 +1,16 @@
+{
+  "Type": "Job:Command",
+  "Description": "Dev/test fallback: agent command job calling Python client (prefer Application Integrator REST)",
+  "Command": "cd @@PATH_TO_REPO@@/sapiens && PYTHONPATH=. python3 -m sapiens_ctm submit --scenario ok",
+  "RunAs": "ctmagent",
+  "Variables": [
+    {
+      "sapScenario": "ok"
+    }
+  ],
+  "OnOK": {
+    "Type": "Job:Command",
+    "Description": "Reconnect validation",
+    "Command": "cd @@PATH_TO_REPO@@/sapiens && ./scripts/ctm-sapiens-job-status.sh %%JOB_ID"
+  }
+}
