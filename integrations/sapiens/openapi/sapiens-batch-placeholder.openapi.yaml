@@ -1,0 +1,92 @@
+openapi: 3.0.3
+info:
+  title: Sapiens ACE Batch Bridge (customer placeholder)
+  description: |
+    Placeholder contract for Control-M Application Integrator REST jobs.
+    Replace paths with customer-published OpenAPI from Sapiens ACE API Builder
+    or Sapiens Core integration endpoints. No proprietary URLs are embedded here.
+  version: 0.1.0
+servers:
+  - url: https://ace-runtime.customer.example
+paths:
+  /health:
+    get:
+      operationId: healthCheck
+      responses:
+        "200":
+          description: Runtime reachable
+  /v1/batch/jobs:
+    post:
+      operationId: submitBatchJob
+      summary: Start ACE flow / batch orchestration (maps mfbsijcl submit)
+      parameters:
+        - in: header
+          name: X-Idempotency-Key
+          schema:
+            type: string
+          description: Control-M idempotency token (IFDBX pattern)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchSubmitRequest"
+      responses:
+        "200":
+          description: Accepted or completed (sync flows)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchJob"
+        "409":
+          description: Duplicate idempotency key — return existing job
+  /v1/batch/jobs/{jobId}:
+    get:
+      operationId: getBatchJobStatus
+      summary: Poll batch status (maps ctm-mf-job-status)
+      parameters:
+        - in: path
+          name: jobId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Current batch state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchJob"
+components:
+  schemas:
+    BatchSubmitRequest:
+      type: object
+      required: [flowName, scenario]
+      properties:
+        flowName:
+          type: string
+          example: ctm-pipeline-batch
+        scenario:
+          type: string
+          enum: [ok, fail-bind, fail-valftp, fail-runsftp, fail-ddl, rerun-bind, rerun-valftp, rerun-runsftp]
+        parameters:
+          type: object
+          additionalProperties: true
+    BatchJob:
+      type: object
+      properties:
+        jobId:
+          type: string
+        correlationId:
+          type: string
+        status:
+          type: string
+          enum: [RUNNING, SUCCEEDED, FAILED, CANCELLED, UNKNOWN]
+        currentStep:
+          type: string
+        failedStep:
+          type: string
+        completedSteps:
+          type: array
+          items:
+            type: string

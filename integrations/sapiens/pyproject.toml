@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sapiens-ctm-client"
+version = "0.1.0"
+description = "Control-M oriented HTTP client for Sapiens / ACE batch integration (mockable)"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+http = ["urllib3>=2.0"]
+
+[project.scripts]
+sapiens-ctm = "sapiens_ctm.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["sapiens_ctm*"]
