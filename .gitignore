@@ -1,0 +1,9 @@
+.DS_Store
+*.mflic
+*.xml
+.env
+.env.*
+config/local-sync.env__pycache__/
+*.pyc
+*.egg-info/
+.eggs/
