@@ -1,0 +1,33 @@
+{
+  "description": "Sapiens batch pipeline restart mapping (mirrors Micro Focus simulation).",
+  "defaultRestartAtFailedStep": true,
+  "restartOverrides": {
+    "STEP.BIND": "STEP.DDL3BIND",
+    "BIND": "DDL3BIND",
+    "STEP.VALFTP": "STEP.FTPBA",
+    "VALFTP": "FTPBA",
+    "STEP.RUNSFTP": "STEP.U4BARA01",
+    "RUNSFTP": "U4BARA01"
+  },
+  "simulationScenarios": {
+    "fullPipelineFlow": "ctm-pipeline-batch",
+    "happyPath": "ok",
+    "failureCases": {
+      "STEP.BIND": "fail-bind",
+      "STEP.VALFTP": "fail-valftp",
+      "STEP.RUNSFTP": "fail-runsftp",
+      "STEP.DDL3BIND": "fail-ddl"
+    },
+    "rerunScenarios": {
+      "STEP.DDL3BIND": "rerun-bind",
+      "STEP.FTPBA": "rerun-valftp",
+      "STEP.U4BARA01": "rerun-runsftp"
+    }
+  },
+  "applicationIntegrator": {
+    "minAIVersion": "DRAIT.9.0.20.101",
+    "idempotencyTokenProperty": "Control-M-Idem_%%ORDERID",
+    "jobType": "REST",
+    "referencePackage": "IFDBX.1.0.10_DataBricks"
+  }
+}

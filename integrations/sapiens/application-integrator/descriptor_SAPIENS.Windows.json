@@ -1,0 +1,10 @@
+{
+    "OS": "win32-x86_64",
+    "PreReq": {
+       "MinAI": "DRAIT.9.0.20.101"
+    },
+    "Installers":
+    [
+         "SAPIENS.ctmai"
+    ]
+}
