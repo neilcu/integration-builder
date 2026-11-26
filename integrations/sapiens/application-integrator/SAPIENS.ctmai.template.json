@@ -1,0 +1,771 @@
+{
+  "app": {
+    "name": "SAPIENS01112026",
+    "displayName": "Sapiens ACE Batch",
+    "defaultType": "REST",
+    "desc": "PLACEHOLDER Sapiens ACE batch. Structure from IFAAF (submit+poll) + IFADF (OAuth pre-exec).",
+    "lastModified": "November 26, 2026",
+    "version": "8.0.00.200",
+    "deploymentVersion": 2,
+    "wsdlURLs": [],
+    "restURLs": [
+      {
+        "restName": "SapiensRuntime",
+        "restURL": "https://{{sapiens_base_url}}",
+        "httpMethods": [
+          "GET",
+          "POST",
+          "DELETE",
+          "PUT",
+          "TRACE",
+          "HEAD",
+          "OPTIONS",
+          "PATCH"
+        ],
+        "restEndpoint": "https://{{sapiens_base_url}}",
+        "restAuthentication": {
+          "restEndpoint": "{{databricks_url}}",
+          "authStatus": "disabled",
+          "isPreemptive": false,
+          "authenticationTypeName": "none",
+          "gcpServiceAccountKey": ""
+        }
+      },
+      {
+        "restName": "SapiensAuth",
+        "restURL": "https://{{sapiens_base_url}}",
+        "httpMethods": [
+          "GET",
+          "POST",
+          "DELETE",
+          "PUT",
+          "TRACE",
+          "HEAD",
+          "OPTIONS",
+          "PATCH"
+        ],
+        "restEndpoint": "https://{{sapiens_base_url}}",
+        "restAuthentication": {
+          "restEndpoint": "{{databricks_url}}",
+          "authStatus": "enabled",
+          "isPreemptive": false,
+          "authenticationTypeName": "oauth2",
+          "oauthAuthentication": {
+            "grantType": "clientCred",
+            "oauth2ClientIdCheck": true,
+            "oauth2ClientSecretCheck": true,
+            "oauthContentType": "application/x-www-form-urlencoded",
+            "oauthBody": "resource={{databricks_resource}}",
+            "oauthBodyCheck": true,
+            "oauthContentTypeCheck": true,
+            "oauth2ClientId": "{{oauth_client_id}}",
+            "oauth2ClientSecret": "{{oauth_client_secret}}",
+            "oauth2tokenParamName": "SAPIENS_ACCESS_TOKEN",
+            "oauth2APIAuthorizationEndpoint": "{{oauth_token_url}}"
+          },
+          "gcpServiceAccountKey": ""
+        }
+      }
+    ],
+    "simluationHost": "",
+    "runtimeParams": [],
+    "params": [],
+    "executionTypes": [
+      {
+        "executionTypeName": "default",
+        "ops": [
+          {
+            "type": "pre-execute",
+            "isEnabled": true,
+            "cmds": [
+              {
+                "type": "REST",
+                "cmdType": "Exec",
+                "appendRequestToOutput": false,
+                "appendResponseToOutput": false,
+                "appendToOutputFilterOperator": "start",
+                "appendToOutputFilterValue": "",
+                "restName": "SapiensAuth",
+                "restURL": "https://{{RESTHost}}",
+                "restURLPath": "{{oauth_token_path}}",
+                "URLParams": "",
+                "headers": "Content-Type=application/x-www-form-urlencoded",
+                "headersPairs": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  }
+                ],
+                "setCookie": false,
+                "cookies": "",
+                "overrideConnection": true,
+                "timeout": "{{timeout}}",
+                "overrideContentType": false,
+                "contentType": "",
+                "restEndpoint": "{{oauth_token_url}}",
+                "httpMethods": [
+                  "GET",
+                  "POST",
+                  "DELETE",
+                  "PUT",
+                  "TRACE",
+                  "HEAD",
+                  "OPTIONS",
+                  "PATCH",
+                  "AiParameter"
+                ],
+                "httpMethod": "POST",
+                "restAuthentication": {
+                  "restEndpoint": "https://{{RESTHost}}",
+                  "authStatus": "disabled",
+                  "isPreemptive": false,
+                  "authenticationTypeName": "none",
+                  "gcpServiceAccountKey": "",
+                  "restPassword": "",
+                  "restUserName": "",
+                  "awsAuth": "role",
+                  "awsaccesskey": "",
+                  "awssecretkey": "",
+                  "awsservicename": "",
+                  "awsregion": "",
+                  "awsiamrolename": "",
+                  "gcpAuthMethod": "access",
+                  "oauthAuthentication": {
+                    "basicAuth": false,
+                    "restUserName": "",
+                    "restPassword": "",
+                    "oauth2APIAuthorizationEndpoint": "",
+                    "oauth2tokenParamName": "",
+                    "grantType": "clientCred",
+                    "oauth2UserName": "",
+                    "oauth2UserPass": "",
+                    "oauth2ClientIdCheck": false,
+                    "oauth2ClientId": "",
+                    "oauth2ClientSecretCheck": false,
+                    "oauth2ClientSecret": "",
+                    "oauthContentTypeCheck": false,
+                    "oauthContentType": "",
+                    "oauthHeadersCheck": false,
+                    "oauthBodyCheck": false,
+                    "oauthBody": "",
+                    "oauthHeadersPairs": [],
+                    "oauthHeaders": "",
+                    "oauth2ClientAssertionTypeCheck": false,
+                    "oauth2ClientAssertionType": "",
+                    "oauth2TokenFile": ""
+                  },
+                  "ociConfigurationMethod": "File",
+                  "ociConfigFilePath": "",
+                  "ociProfileName": "",
+                  "alibabaAccesskeyID": "",
+                  "alibabaSecretAccesskey": "",
+                  "awsARNrole": "",
+                  "awsRoleSessionName": "",
+                  "k8JWTfilePath": ""
+                },
+                "extractInfo": [
+                  {
+                    "uid": "0.11744122778930954",
+                    "onSectionOperator": "and",
+                    "onSection": [],
+                    "httpCode": "any",
+                    "extractFrom": "BODY",
+                    "operator": "any",
+                    "onOption": "start",
+                    "doSection": [
+                      {
+                        "uid": "0.4813287042119836",
+                        "doOption": "runtimeParam",
+                        "extHandleData": {
+                          "extractData": {
+                            "keepExtracted": true,
+                            "cdataElem": "wholeElm",
+                            "keepParamName": "SAPIENS_ACCESS_TOKEN",
+                            "keepParamEncrypt": true,
+                            "operator": "",
+                            "value": "",
+                            "valueSec": "",
+                            "cdataPath": "",
+                            "printPrefix": "",
+                            "printSuffix": ""
+                          },
+                          "extOption": {
+                            "key": "Whole line",
+                            "value": "wholeLine"
+                          },
+                          "previewLine": "",
+                          "searchForTextStart": "",
+                          "searchForTextEnd": "",
+                          "fileName": "",
+                          "siblingElem": "",
+                          "pattern": "",
+                          "searchForTextStartIndex": 0,
+                          "searchForTextEndIndex": {}
+                        }
+                      }
+                    ],
+                    "responseContentType": "JSON",
+                    "elementPath": "access_token",
+                    "httpCodeOther": "",
+                    "elementName": "",
+                    "onOptionVal": "",
+                    "value": "",
+                    "secValue": "",
+                    "cdataPath": ""
+                  }
+                ],
+                "desc": "OAuth client credentials (IFADF/IFDBX pattern)",
+                "ConditionSteps": [
+                  {
+                    "stepConditionOption": "valueOfParam",
+                    "stepConditionValue": "PRINCIPAL",
+                    "stepConditionParam": "SWITCH",
+                    "stepConditionOperator": "eq"
+                  }
+                ],
+                "stepConditional": true,
+                "bodyBase64": "Z3JhbnRfdHlwZT1jbGllbnRfY3JlZGVudGlhbHMmY2xpZW50X2lkPXt7YXBwX2lkfX0mY2xpZW50X3NlY3JldD17e2NsaWVudF9zZWNyZXR9fSZyZXNvdXJjZT1odHRwczovL21hbmFnZW1lbnQuYXp1cmUuY29tLw==",
+                "rcRules": [],
+                "bodyType": "Text",
+                "bodyMultiPart": [],
+                "WStimeout": "",
+                "WScontentType": "",
+                "wsdlOptions": {
+                  "endPoint": "",
+                  "endPointUsername": "",
+                  "endPointPass": ""
+                },
+                "WSheaders": "",
+                "outputAppendWSResponseParameter": "",
+                "outputAppendWSRequestParameter": "",
+                "useOutputAppendWSResponseParameter": false,
+                "useOutputAppendWSRequestParameter": false,
+                "httpMethodParam": "",
+                "WsURLParameter": "",
+                "wsHeaderTableParameter": "",
+                "restBodyParam": "",
+                "useHttpMethodParam": false,
+                "useWsAuthenticationParameter": false,
+                "useWsURLParameter": false,
+                "useWsHeaderTableParameter": false,
+                "useRestBodyParam": false,
+                "outputHandlingParameter": "",
+                "useOutputHandlingParameter": false,
+                "appendToExecLogFilterValue": "",
+                "rerunInterval": "{{rerun_interval}}",
+                "nrOfRetries": "{{attempt_reruns}}",
+                "RerunStepPairs": [
+                  {
+                    "type": "httpCode",
+                    "operator": "eq",
+                    "value": "{{http_codes}}",
+                    "secValue": ""
+                  },
+                  {
+                    "type": "message",
+                    "operator": "contains",
+                    "value": "Read timed out",
+                    "secValue": ""
+                  },
+                  {
+                    "type": "message",
+                    "operator": "contains",
+                    "value": "Remote host terminated the handshake",
+                    "secValue": ""
+                  },
+                  {
+                    "type": "message",
+                    "operator": "contains",
+                    "value": "Unexpected end of file from server",
+                    "secValue": ""
+                  },
+                  {
+                    "type": "message",
+                    "operator": "contains",
+                    "value": "Connection timed out",
+                    "secValue": ""
+                  },
+                  {
+                    "type": "message",
+                    "operator": "contains",
+                    "value": "connect timed out",
+                    "secValue": ""
+                  },
+                  {
+                    "type": "message",
+                    "operator": "contains",
+                    "value": "Connection reset",
+                    "secValue": ""
+                  }
+                ],
+                "appendRequestToExecLogWSParameter": "",
+                "appendResponseToExecLogWSParameter": "",
+                "useAppendRequestToExecLogWSParameter": false,
+                "useAppendResponseToExecLogWSParameter": false,
+                "rerunChecked": true,
+                "stepId": "0.6463532985924881",
+                "name": "SP Authentication",
+                "WsAuthenticationParameter": ""
+              }
+            ]
+          },
+          {
+            "type": "execute",
+            "isEnabled": true,
+            "cmds": [
+              {
+                "ConditionSteps": [
+                  {
+                    "stepConditionOption": "valueOfParam",
+                    "stepConditionValue": "RD",
+                    "stepConditionOperator": "eq",
+                    "stepConditionParam": "Action"
+                  },
+                  {
+                    "stepConditionOption": "valueOfParam",
+                    "stepConditionValue": "v1",
+                    "stepConditionOperator": "eq",
+                    "stepConditionParam": "AirflowVersion"
+                  }
+                ],
+                "type": "REST",
+                "cmdType": "Exec",
+                "handleRc": true,
+                "rcRules": [],
+                "name": "Submit Sapiens batch flow",
+                "defaultJobStatus": "0",
+                "extractInfo": [
+                  {
+                    "doSection": [
+                      {
+                        "uid": "sapiens-submit-extract",
+                        "extHandleData": {
+                          "extractData": {
+                            "keepParamName": "SAPIENS_JOB_ID",
+                            "keepParamInOutput": true,
+                            "elementPath": "$.jobId",
+                            "value": ""
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "txt": "",
+                "stepConditional": true,
+                "appendRequestToOutput": false,
+                "appendResponseToOutput": false,
+                "appendToOutputFilterOperator": "start",
+                "appendToOutputFilterValue": "",
+                "restName": "SapiensRuntime",
+                "setCookie": false,
+                "cookies": "",
+                "overrideConnection": true,
+                "timeout": "{{ConnectionTimeout}}",
+                "overrideContentType": false,
+                "contentType": "",
+                "restEndpoint": "https://{{sapiens_base_url}}",
+                "restURL": "{{AirFlowUrl}}",
+                "httpMethods": [
+                  "GET",
+                  "POST",
+                  "DELETE",
+                  "PUT",
+                  "TRACE",
+                  "HEAD",
+                  "OPTIONS",
+                  "PATCH",
+                  "AiParameter"
+                ],
+                "httpMethod": "POST",
+                "restAuthentication": {
+                  "restEndpoint": "",
+                  "authStatus": "enabled",
+                  "authenticationTypeName": "basic",
+                  "isPreemptive": true,
+                  "restUserName": "{{Username}}",
+                  "restPassword": "{{Password}}",
+                  "oauthAuthentication": {
+                    "basicAuth": false,
+                    "restUserName": "",
+                    "restPassword": "",
+                    "oauth2APIAuthorizationEndpoint": "",
+                    "oauth2tokenParamName": "",
+                    "grantType": "clientCred",
+                    "oauth2UserName": "",
+                    "oauth2UserPass": "",
+                    "oauth2ClientIdCheck": false,
+                    "oauth2ClientId": "",
+                    "oauth2ClientSecretCheck": false,
+                    "oauth2ClientSecret": "",
+                    "oauthContentTypeCheck": false,
+                    "oauthContentType": "",
+                    "oauthHeadersCheck": false,
+                    "oauthHeadersPairs": [],
+                    "oauthHeaders": "",
+                    "oauthBodyCheck": false,
+                    "oauthBody": ""
+                  },
+                  "awsAuth": "role",
+                  "awsaccesskey": "",
+                  "awssecretkey": "",
+                  "awsservicename": "",
+                  "awsregion": "",
+                  "awsiamrolename": "",
+                  "gcpAuthMethod": "access",
+                  "gcpServiceAccountKey": "",
+                  "ociConfigurationMethod": "File",
+                  "ociConfigFilePath": "",
+                  "ociProfileName": "",
+                  "alibabaAccesskeyID": "",
+                  "alibabaSecretAccesskey": "",
+                  "awsARNrole": "",
+                  "awsRoleSessionName": ""
+                },
+                "URLParams": "",
+                "bodyBase64": "eyJkYWdfcnVuX2lkIjoie3tkYWdydW5pZH19IiwiY29uZiI6e3tQYXJhbWV0ZXJzfX0sIm5vdGUiOiJ7e0FpckZsb3dVcmx9fS9kYWdzL3t7ZGFnbmFtZX19L2dyYXBoPyJ9",
+                "bodyType": "Text",
+                "bodyMultiPart": [],
+                "headersPairs": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "name": "X-Idempotency-Key",
+                    "value": "{{idempotency_token}}"
+                  }
+                ],
+                "headers": "Content-Type=application/json",
+                "restURLPath": "/v1/batch/jobs",
+                "WStimeout": "",
+                "WScontentType": "",
+                "wsdlOptions": {
+                  "endPoint": "",
+                  "endPointUsername": "",
+                  "endPointPass": ""
+                },
+                "WSheaders": "",
+                "outputAppendWSResponseParameter": "",
+                "outputAppendWSRequestParameter": "",
+                "useOutputAppendWSResponseParameter": false,
+                "useOutputAppendWSRequestParameter": false,
+                "httpMethodParam": "",
+                "WsURLParameter": "",
+                "wsHeaderTableParameter": "",
+                "restBodyParam": "",
+                "useHttpMethodParam": false,
+                "useWsAuthenticationParameter": false,
+                "useWsURLParameter": false,
+                "useWsHeaderTableParameter": false,
+                "useRestBodyParam": false,
+                "outputHandlingParameter": "",
+                "useOutputHandlingParameter": false,
+                "desc": "AAF initiate-DAG analog",
+                "WsAuthenticationParameter": "",
+                "appendToExecLogFilterValue": "",
+                "rerunInterval": "{{rerun_interval}}",
+                "nrOfRetries": "{{attempt_reruns}}",
+                "RerunStepPairs": [],
+                "appendRequestToExecLogWSParameter": "",
+                "appendResponseToExecLogWSParameter": "",
+                "useAppendRequestToExecLogWSParameter": false,
+                "useAppendResponseToExecLogWSParameter": false,
+                "body": "{\"flowName\":\"{{flow_name}}\",\"scenario\":\"{{scenario}}\"}",
+                "http_codes": "{{http_codes}}"
+              }
+            ]
+          },
+          {
+            "type": "execute",
+            "isEnabled": true,
+            "cmds": [
+              {
+                "name": "Poll Sapiens batch status",
+                "cmdType": "MonitorCompletion",
+                "type": "REST",
+                "appendRequestToOutput": false,
+                "appendResponseToOutput": false,
+                "appendToOutputFilterOperator": "start",
+                "appendToOutputFilterValue": "",
+                "interval": "{{StatusPolling}}",
+                "enableStopFailure": true,
+                "retryCount": "{{FailureTolerance}}",
+                "enableCompletionCreteria": false,
+                "rcRules": [],
+                "restEndpoint": "{{AirFlowUrl}}",
+                "ConditionSteps": [],
+                "txt": "",
+                "extractInfo": [
+                  {
+                    "doSection": [
+                      {
+                        "uid": "sapiens-status-extract",
+                        "extHandleData": {
+                          "extractData": {
+                            "keepParamName": "BATCH_STATUS",
+                            "keepParamInOutput": true,
+                            "elementPath": "$.status",
+                            "value": ""
+                          }
+                        }
+                      },
+                      {
+                        "uid": "sapiens-failed-step-extract",
+                        "extHandleData": {
+                          "extractData": {
+                            "keepParamName": "FAILED_STEP",
+                            "keepParamInOutput": true,
+                            "elementPath": "$.failedStep",
+                            "value": ""
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "bodyType": "Text",
+                "bodyMultiPart": [],
+                "setCookie": false,
+                "cookies": "",
+                "overrideConnection": true,
+                "timeout": "{{ConnectionTimeout}}",
+                "overrideContentType": false,
+                "contentType": "",
+                "restURLPath": "/v1/batch/jobs/{{SAPIENS_JOB_ID}}",
+                "URLParams": "",
+                "headers": "Content-Type=application/json",
+                "body": "",
+                "restAuthentication": {
+                  "authenticationTypeName": "basic",
+                  "authStatus": "enabled",
+                  "isPreemptive": true,
+                  "restUserName": "{{Username}}",
+                  "restPassword": "{{Password}}",
+                  "awsAuth": "role",
+                  "awsaccesskey": "",
+                  "awssecretkey": "",
+                  "awsservicename": "",
+                  "awsregion": "",
+                  "awsiamrolename": "",
+                  "gcpAuthMethod": "access",
+                  "gcpServiceAccountKey": "",
+                  "oauthAuthentication": {
+                    "basicAuth": false,
+                    "restUserName": "",
+                    "restPassword": "",
+                    "oauth2APIAuthorizationEndpoint": "",
+                    "oauth2tokenParamName": "",
+                    "grantType": "clientCred",
+                    "oauth2UserName": "",
+                    "oauth2UserPass": "",
+                    "oauth2ClientIdCheck": false,
+                    "oauth2ClientId": "",
+                    "oauth2ClientSecretCheck": false,
+                    "oauth2ClientSecret": "",
+                    "oauthContentTypeCheck": false,
+                    "oauthContentType": "",
+                    "oauthHeadersCheck": false,
+                    "oauthBodyCheck": false,
+                    "oauthBody": "",
+                    "oauthHeadersPairs": [],
+                    "oauthHeaders": ""
+                  },
+                  "restEndpoint": "",
+                  "ociConfigurationMethod": "File",
+                  "ociConfigFilePath": "",
+                  "ociProfileName": "",
+                  "alibabaAccesskeyID": "",
+                  "alibabaSecretAccesskey": "",
+                  "awsARNrole": "",
+                  "awsRoleSessionName": ""
+                },
+                "WStimeout": "",
+                "WScontentType": "",
+                "wsdlOptions": {
+                  "endPoint": "",
+                  "endPointUsername": "",
+                  "endPointPass": ""
+                },
+                "WSheaders": "",
+                "outputAppendWSResponseParameter": "",
+                "outputAppendWSRequestParameter": "",
+                "useOutputAppendWSResponseParameter": false,
+                "useOutputAppendWSRequestParameter": false,
+                "httpMethodParam": "",
+                "WsURLParameter": "",
+                "wsHeaderTableParameter": "",
+                "restBodyParam": "",
+                "useHttpMethodParam": false,
+                "useWsAuthenticationParameter": false,
+                "useWsURLParameter": false,
+                "useWsHeaderTableParameter": false,
+                "useRestBodyParam": false,
+                "outputHandlingParameter": "",
+                "useOutputHandlingParameter": false,
+                "restName": "SapiensRuntime",
+                "restURL": "{{AirFlowUrl}}",
+                "httpMethod": "GET",
+                "httpMethods": [
+                  "GET",
+                  "POST",
+                  "DELETE",
+                  "PUT",
+                  "TRACE",
+                  "HEAD",
+                  "OPTIONS",
+                  "PATCH",
+                  "AiParameter"
+                ],
+                "headersPairs": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "WsAuthenticationParameter": "",
+                "appendToExecLogFilterValue": "",
+                "rerunInterval": "{{rerun_interval}}",
+                "nrOfRetries": "{{attempt_reruns}}",
+                "RerunStepPairs": [],
+                "appendRequestToExecLogWSParameter": "",
+                "appendResponseToExecLogWSParameter": "",
+                "useAppendRequestToExecLogWSParameter": false,
+                "useAppendResponseToExecLogWSParameter": false,
+                "desc": "AAF verify-completion analog",
+                "http_codes": "{{http_codes}}"
+              }
+            ]
+          },
+          {
+            "type": "post-execute",
+            "isEnabled": true,
+            "cmds": [
+              {
+                "stepId": "0.9997455425824149",
+                "appendRequestToOutput": false,
+                "appendResponseToOutput": false,
+                "appendToOutputFilterOperator": "start",
+                "appendToOutputFilterValue": "",
+                "rcRules": [],
+                "extractInfo": [],
+                "type": "REST",
+                "restName": "SapiensRuntime",
+                "setCookie": false,
+                "cookies": "",
+                "overrideConnection": false,
+                "timeout": "",
+                "overrideContentType": false,
+                "contentType": "",
+                "httpMethods": [
+                  "GET",
+                  "POST",
+                  "DELETE",
+                  "PUT",
+                  "TRACE",
+                  "HEAD",
+                  "OPTIONS",
+                  "PATCH",
+                  "AiParameter"
+                ],
+                "httpMethod": "GET",
+                "restAuthentication": {
+                  "restEndpoint": "",
+                  "authStatus": "disabled",
+                  "authenticationTypeName": "none",
+                  "isPreemptive": false,
+                  "restUserName": "",
+                  "restPassword": "",
+                  "oauthAuthentication": {
+                    "basicAuth": false,
+                    "restUserName": "",
+                    "restPassword": "",
+                    "oauth2APIAuthorizationEndpoint": "",
+                    "oauth2tokenParamName": "",
+                    "grantType": "clientCred",
+                    "oauth2UserName": "",
+                    "oauth2UserPass": "",
+                    "oauth2ClientIdCheck": false,
+                    "oauth2ClientId": "",
+                    "oauth2ClientSecretCheck": false,
+                    "oauth2ClientSecret": "",
+                    "oauthContentTypeCheck": false,
+                    "oauthContentType": "",
+                    "oauthHeadersCheck": false,
+                    "oauthHeadersPairs": [],
+                    "oauthHeaders": "",
+                    "oauthBodyCheck": false,
+                    "oauthBody": "",
+                    "oauth2ClientAssertionTypeCheck": false,
+                    "oauth2ClientAssertionType": "",
+                    "oauth2TokenFile": ""
+                  },
+                  "awsAuth": "role",
+                  "awsaccesskey": "",
+                  "awssecretkey": "",
+                  "awsservicename": "",
+                  "awsregion": "",
+                  "awsiamrolename": "",
+                  "gcpAuthMethod": "access",
+                  "gcpServiceAccountKey": "",
+                  "ociConfigurationMethod": "File",
+                  "ociConfigFilePath": "",
+                  "ociProfileName": "",
+                  "alibabaAccesskeyID": "",
+                  "alibabaSecretAccesskey": "",
+                  "awsARNrole": "",
+                  "awsRoleSessionName": "",
+                  "k8JWTfilePath": ""
+                },
+                "URLParams": "",
+                "body": "",
+                "bodyType": "Text",
+                "bodyMultiPart": [],
+                "headersPairs": [],
+                "headers": "",
+                "restURLPath": "/v1/batch/jobs/{{SAPIENS_JOB_ID}}",
+                "cmdType": "Exec",
+                "ConditionSteps": [],
+                "WStimeout": "",
+                "WScontentType": "",
+                "wsdlOptions": {
+                  "endPoint": "",
+                  "endPointUsername": "",
+                  "endPointPass": ""
+                },
+                "WSheaders": "",
+                "outputAppendWSResponseParameter": "",
+                "outputAppendWSRequestParameter": "",
+                "useOutputAppendWSResponseParameter": false,
+                "useOutputAppendWSRequestParameter": false,
+                "httpMethodParam": "",
+                "WsURLParameter": "",
+                "wsHeaderTableParameter": "",
+                "restBodyParam": "",
+                "useHttpMethodParam": false,
+                "useWsAuthenticationParameter": false,
+                "useWsURLParameter": false,
+                "useWsHeaderTableParameter": false,
+                "useRestBodyParam": false,
+                "outputHandlingParameter": "",
+                "useOutputHandlingParameter": false,
+                "appendToExecLogFilterValue": "",
+                "rerunInterval": "",
+                "nrOfRetries": "",
+                "RerunStepPairs": [],
+                "appendRequestToExecLogWSParameter": "",
+                "appendResponseToExecLogWSParameter": "",
+                "useAppendRequestToExecLogWSParameter": false,
+                "useAppendResponseToExecLogWSParameter": false,
+                "WsAuthenticationParameter": "",
+                "desc": "Post-execute finalize (IFADF post pattern)",
+                "name": "Finalize Sapiens batch job"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "WSDLS": []
+}
